@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import com.cilsa.ui.CustomStatusBar?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="500.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml"
+            xmlns:fx:controller="com.cilsa.ui.MainController"
+            stylesheets="/com/cilsa/ui/style.css">
+   <top>
+      <MenuBar>
+         <menus>
+            <Menu text="Archivo">
+               <items>
+                  <MenuItem text="Seleccionar Archivo" onAction="#handleSeleccionarArchivo"/>
+                  <SeparatorMenuItem/>
+                  <MenuItem text="Salir" onAction="#handleSalir"/>
+               </items>
+            </Menu>
+            <Menu text="Ayuda">
+               <items>
+                  <MenuItem text="Acerca de" onAction="#handleAcercaDe"/>
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+
+   <center>
+      <SplitPaneDivider>
+         <SplitPane dividerPositions="0.3" orientation="VERTICAL" BorderPane.alignment="CENTER">
+            <left>
+               <VBox spacing="10" padding="10" styleClass="input-panel">
+                  <padding>
+                     <Insets bottom="5" left="5" right="5" top="5"/>
+                  </padding>
+                  <Text text="Sistema de Búsqueda 2026" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                  <Separator />
+                  
+                  <Label text="Archivo de Entrada:"/>
+                  <HBox spacing="5">
+                      <TextField fx:id="archivoField" />
+                      <Button text="..." onAction="#handleBuscarArchivo" minWidth="30"/>
+                  </HBox>
+                  
+                  <Label text="Criterio de Búsqueda:"/>
+                  <ComboBox fx:id="criterioBox" onAction="#handleCriterioCambio"/>
+                  <items>
+                      <String fx:id="criterioPaís" text="País"/>
+                      <String fx:id="criterioOcupación" text="Ocupación"/>
+                      <String fx:id="criterioEncabezado" text="Encabezado"/>
+                  </items>
+                  
+                  <Label text="Término a Buscar:"/>
+                  <TextField fx:id="terminoField" onAction="#handleBuscar"/>
+                  
+                  <Button fx:id="buscarBtn" text="Buscar" onAction="#handleBuscar" 
+                          style="-fx-min-width: 80px; -fx-padding: 5px 10px;" />
+                  
+                  <Button fx:id="limpiarBtn" text="Guardar y Limpiar" onAction="#handleGuardaryLimpiar"
+                          style="-fx-min-width: 120px; -fx-padding: 5px 10px;" GridPane.rowIndex="1"/>
+                  
+                  <Label text="Encabezado 1 (Ej: Nombre):"/>
+                  <TextField fx:id="encabezado1Field" />
+                  
+                  <Label text="Encabezado 2 (Ej: Teléfono):"/>
+                  <TextField fx:id="encabezado2Field" />
+                  
+                  <Label text="Encabezado 3 (Ej: País):"/>
+                  <TextField fx:id="encabezado3Field" />
+                  
+                  <Label text="Encabezado 4 (Ej: Ocupación):"/>
+                  <TextField fx:id="encabezado4Field" />
+               </VBox>
+            </left>
+
+            <center>
+               <VBox spacing="5" padding="5">
+                  <TextFlow>
+                     <Text text="Resultados:" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                  </TextFlow>
+                  
+                  <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="results-scroll-pane">
+                      <TextArea fx:id="resultadosArea" 
+                                wrapText="true" 
+                                editable="false"
+                                focusTraversable="true"/>
+                  </ScrollPane>
+                  
+                  <HBox spacing="5" alignment="center_bottom" visible="false" fx:id="botonesGuardar">
+                      <Button text="Guardar Resultados" onAction="#handleGuardarResultados" 
+                              style="-fx-min-width: 120px; -fx-padding: 5px 10px;" />
+                      <Button text="Cerrar" onAction="#handleCerrar" 
+                              style="-fx-min-width: 80px; -fx-padding: 5px 10px;" />
+                  </HBox>
+               </VBox>
+            </center>
+         </SplitPane>
+      </center>
+
+      <bottom>
+         <CustomStatusBar fx:id="statusBar"/>
+      </bottom>
+</BorderPane>
